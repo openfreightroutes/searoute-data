@@ -1,11 +1,33 @@
 {
   "name": "@openfreightroutes/searoute-data",
   "version": "0.1.0",
+  "license": "MIT AND EUPL-1.2",
   "type": "module",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    "./marnet100": "./marnet100/marnet100.json.gz",
+    "./marnet50": "./marnet50/marnet50.json.gz",
+    "./marnet20": "./marnet20/marnet20.json.gz",
+    "./ports": "./ports/ports.json.gz",
+    "./eca": "./eca/eca.json.gz",
+    "./passages": "./passages/passages.json.gz",
+    "./manifest.json": "./manifest.json"
+  },
+  "files": [
+    "marnet100/*.json.gz",
+    "marnet50/*.json.gz",
+    "marnet20/*.json.gz",
+    "passages/*.json.gz",
+    "eca/*.json.gz",
+    "ports/*.json.gz",
+    "manifest.json",
+    "NOTICE",
+    "LICENSE",
+    "LICENSES/"
+  ],
   "scripts": {
     "test": "node --test test/"
   },

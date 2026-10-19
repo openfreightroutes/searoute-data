@@ -1,0 +1,30 @@
+{
+  "eurostatVersion": "3.5",
+  "source": "https://github.com/eurostat/searoute",
+  "files": {
+    "marnet100/marnet100.json.gz": {
+      "sha256": "c2e46ca7a627beaabc8680bcc565c940a7aea1ea396b8c649933118703cdd01f",
+      "licence": "EUPL-1.2"
+    },
+    "marnet50/marnet50.json.gz": {
+      "sha256": "7fb2317280d623e8a4e0ff4c62216bb997ce12204ee57eaddcefadde6706afc1",
+      "licence": "EUPL-1.2"
+    },
+    "marnet20/marnet20.json.gz": {
+      "sha256": "4e192fd58273afdc32bc8c9c1a960e0511a9ebf5266127382c56f495416c2ddb",
+      "licence": "EUPL-1.2"
+    },
+    "passages/passages.json.gz": {
+      "sha256": "de6ab45bdb84d60130203216c00a1a8c88d3d8429cfe0c0e4b237558b40360c6",
+      "licence": "MIT"
+    },
+    "eca/eca.json.gz": {
+      "sha256": "3827b4f615be347340d5d41c180679de5046a0131d13f161f51532f12df7f9e1",
+      "licence": "MIT"
+    },
+    "ports/ports.json.gz": {
+      "sha256": "426c09c8b85a8ad558021fce5873c106607f5ae6bcd38a15dd9f89218212be76",
+      "licence": "MIT"
+    }
+  }
+}
