@@ -1,6 +1,7 @@
 {
   "eurostatVersion": "3.5",
   "source": "https://github.com/eurostat/searoute",
+  "via": "searoute-ts@2.3.1",
   "files": {
     "marnet100/marnet100.json.gz": {
       "sha256": "c2e46ca7a627beaabc8680bcc565c940a7aea1ea396b8c649933118703cdd01f",

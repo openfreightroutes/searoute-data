@@ -78,6 +78,9 @@ const specs = {
     ...viaLanes.flatMap(([n, a, b]) => ['suez', 'panama', 'gibraltar', 'malacca', 'sunda', 'cape_horn', 'northeast'].map((p) => ({
       name: `options/${n}-via-${p}`, points: [a, b], options: { ...km, via: [p] },
     }))),
+    ...passages.filter((p) => !['suez', 'panama', 'gibraltar', 'malacca', 'sunda', 'cape_horn', 'northeast'].includes(p)).map((p) => ({
+      name: `options/${viaLanes[0][0]}-via-${p}`, points: [viaLanes[0][1], viaLanes[0][2]], options: { ...km, via: [p] },
+    })),
     ...viaLanes.flatMap(([n, a, b]) => ['suez', 'northeast'].map((p) => ({
       name: `options/${n}-via-${p}-allow-arctic`, points: [a, b], options: { ...km, via: [p], allowArctic: true },
     }))),
@@ -124,15 +127,24 @@ const specs = {
     { name: 'alternatives/shanghai-rotterdam-k6-similarity-0.1', fn: 'seaRouteAlternatives', points: [SHANGHAI, ROTTERDAM], options: { ...km, k: 6, similarityThreshold: 0.1 } },
     { name: 'alternatives/shanghai-rotterdam-k3-restrict-suez', fn: 'seaRouteAlternatives', points: [SHANGHAI, ROTTERDAM], options: { ...km, k: 3, restrictions: ['suez'] } },
   ],
-  emissions: [['ny-rotterdam', NYC, ROTTERDAM], ['barcelona-marseille', BARCELONA, MARSEILLE], ['yokohama-la', YOKOHAMA, LA]]
+  emissions: [
+    ...[['ny-rotterdam', NYC, ROTTERDAM], ['barcelona-marseille', BARCELONA, MARSEILLE], ['yokohama-la', YOKOHAMA, LA]]
     .flatMap(([n, a, b]) => [true, false].flatMap((eca) => [
       { name: 'emissions', options: { emissions: true } },
       ...vessels.map((v) => ({ name: `vessel-${v}`, options: { emissions: true, vesselClass: v } })),
       { name: 'co2e-factor-30', options: { emissions: true, co2eFactorKgPerKm: 30 } },
-      { name: 'glec-inflation-0.15', options: { emissions: true, glecInflation: 0.15 } },
+      { name: 'glec-inflation-0.15', options: { emissions: true, vesselClass: 'panamax', glecInflation: 0.15 } },
     ].map((e) => ({
       name: `emissions/${n}-${e.name}-eca-${eca}`, eca, points: [a, b], options: { ...km, ...e.options },
     })))),
+    ...[true, false].map((eca) => ({
+      name: `emissions/multi-shanghai-singapore-rotterdam-panamax-eca-${eca}`,
+      fn: 'seaRouteMulti',
+      eca,
+      points: [SHANGHAI, SINGAPORE, ROTTERDAM],
+      options: { ...km, emissions: true, vesselClass: 'panamax' },
+    })),
+  ],
   errors: [
     { name: 'errors/inland-origin', points: [[10, 50], ROTTERDAM], options: { ...km, maxSnapDistanceKm: 100 } },
     { name: 'errors/inland-destination', points: [ROTTERDAM, [10, 50]], options: { ...km, maxSnapDistanceKm: 100 } },

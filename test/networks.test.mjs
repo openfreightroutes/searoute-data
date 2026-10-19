@@ -21,9 +21,11 @@ for (const [source, pkg] of Object.entries(networks)) {
 
     const decoded = JSON.parse(gunzipSync(checkedIn))
     const src = require(`../${input}`)
+    assert.equal(decoded.version, 'eurostat-searoute-3.5')
     assert.equal(decoded.features.length, src.features.length)
     src.features.forEach((f, i) => {
       assert.deepEqual(decoded.features[i].coords, f.geometry.coordinates)
+      assert.equal(decoded.features[i].pass, f.properties?.pass)
     })
   })
 }

@@ -15,5 +15,5 @@ for (const [path, licence] of Object.entries(licences)) {
   files[path] = { sha256: createHash('sha256').update(readFileSync(path)).digest('hex'), licence }
 }
 
-const manifest = { eurostatVersion: '3.5', source: 'https://github.com/eurostat/searoute', files }
+const manifest = { eurostatVersion: '3.5', source: 'https://github.com/eurostat/searoute', via: 'searoute-ts@2.3.1', files }
 writeFileSync('manifest.json', JSON.stringify(manifest, null, 2) + '\n')

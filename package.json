@@ -1,6 +1,11 @@
 {
   "name": "@openfreightroutes/searoute-data",
   "version": "0.1.0",
+  "description": "Gzipped Eurostat searoute networks, passages, ECA zones and ports for searoute ports in Go and Node",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openfreightroutes/searoute-data.git"
+  },
   "license": "MIT AND EUPL-1.2",
   "type": "module",
   "private": false,
@@ -14,7 +19,8 @@
     "./ports": "./ports/ports.json.gz",
     "./eca": "./eca/eca.json.gz",
     "./passages": "./passages/passages.json.gz",
-    "./manifest.json": "./manifest.json"
+    "./manifest.json": "./manifest.json",
+    "./package.json": "./package.json"
   },
   "files": [
     "marnet100/*.json.gz",

@@ -10,12 +10,13 @@ cd "$(dirname "$0")/.."
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 
-base=https://raw.githubusercontent.com/eurostat/searoute/v3.5/modules/core/src/main/resources/marnet
+base=https://raw.githubusercontent.com/eurostat/searoute/searoute-3.5/modules/core/src/main/resources/marnet
 for km in 100 50 20; do
   curl -fsSL -o "$work/marnet_plus_${km}km.gpkg" "$base/marnet_plus_${km}km.gpkg"
   ogr2ogr -f GeoJSON -lco COORDINATE_PRECISION=6 "$work/marnet${km}.geojson" "$work/marnet_plus_${km}km.gpkg"
   node scripts/convert-network.mjs "$work/marnet${km}.geojson" "marnet${km}/marnet${km}.json.gz"
 done
 
+npm ci
 node scripts/extract-tables.mjs
 node scripts/manifest.mjs

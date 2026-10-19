@@ -23,6 +23,14 @@ test('every case has exactly one of result and error', () => {
   }
 })
 
+test('every case uses a known function, network and error name', () => {
+  for (const c of Object.values(load('golden')).flat()) {
+    assert.ok(['seaRoute', 'seaRouteMulti', 'seaRouteAlternatives'].includes(c.fn), c.name)
+    assert.ok(['marnet100', 'marnet50', 'marnet20'].includes(c.network), c.name)
+    if (c.error) assert.ok(['SnapFailedError', 'NoRouteError', 'UnknownPortError', 'Error'].includes(c.error.name), c.name)
+  }
+})
+
 test('regenerating produces byte-identical files', () => {
   const dir = mkdtempSync(join(tmpdir(), 'golden-'))
   execFileSync('node', ['scripts/golden.mjs', dir])
