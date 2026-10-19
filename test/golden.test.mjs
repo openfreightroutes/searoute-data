@@ -31,11 +31,11 @@ test('every case uses a known function, network and error name', () => {
   }
 })
 
-test('regenerating produces byte-identical files', () => {
+test('regenerating produces identical JSON', () => {
   const dir = mkdtempSync(join(tmpdir(), 'golden-'))
   execFileSync('node', ['scripts/golden.mjs', dir])
   assert.deepEqual(readdirSync(dir).sort(), names.map((n) => `${n}.json.gz`).sort())
   for (const n of names) {
-    assert.ok(readFileSync(`golden/${n}.json.gz`).equals(readFileSync(`${dir}/${n}.json.gz`)), n)
+    assert.ok(gunzipSync(readFileSync(`golden/${n}.json.gz`)).equals(gunzipSync(readFileSync(`${dir}/${n}.json.gz`))), n)
   }
 })

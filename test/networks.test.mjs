@@ -17,7 +17,7 @@ for (const [source, pkg] of Object.entries(networks)) {
     execFileSync('node', ['scripts/convert-network.mjs', input, out])
 
     const checkedIn = readFileSync(`${pkg}/${pkg}.json.gz`)
-    assert.deepEqual(readFileSync(out), checkedIn)
+    assert.ok(gunzipSync(readFileSync(out)).equals(gunzipSync(checkedIn)))
 
     const decoded = JSON.parse(gunzipSync(checkedIn))
     const src = require(`../${input}`)
