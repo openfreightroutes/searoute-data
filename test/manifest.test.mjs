@@ -15,7 +15,7 @@ test('manifest hashes match the files on disk', () => {
 
 test('manifest lists exactly the .json.gz files under the package dirs', () => {
   const onDisk = readdirSync('.', { withFileTypes: true })
-    .filter((d) => d.isDirectory() && d.name !== 'node_modules')
+    .filter((d) => d.isDirectory() && !['node_modules', 'golden', '.git', '.superpowers'].includes(d.name))
     .flatMap((d) => readdirSync(d.name).filter((f) => f.endsWith('.json.gz')).map((f) => `${d.name}/${f}`))
   assert.deepEqual(Object.keys(manifest.files).sort(), onDisk.sort())
 })
